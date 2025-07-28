@@ -3,10 +3,8 @@
     <Panel
         :showWrongPasswordIndicator="showWrongPasswordIndicator"
         @hideWrongPasswordIndicator="showWrongPasswordIndicator = false"
-        v-on:displaySessionChooser="displaySessionChooser = true"
         v-on:displayUserChooser="displayUserChooser = true"
-        :user="activeUser"
-        :session="activeSession"></Panel>
+        :user="activeUser"></Panel>
   </div>
   <transition name="fade">
     <UserChooser
@@ -14,13 +12,6 @@
         :users="users"
         :activeUser="activeUser"
         v-if="displayUserChooser"></UserChooser>
-  </transition>
-  <transition name="fade">
-    <SessionChooser @sessionChosen="activeSession = $event"
-                    @hide="displaySessionChooser = false"
-                    :sessions="sessions"
-                    :activeSession="activeSession"
-                    v-if="displaySessionChooser"></SessionChooser>
   </transition>
   <transition name="fade">
     <div v-if="fadeOut" class="fade-out-overlay"></div>
@@ -42,6 +33,7 @@ body
   height: 100vh
   overflow: hidden
   display: flex
+  flex-direction: column
   align-items: center
   justify-content: center
 
@@ -64,14 +56,12 @@ body
 <script>
 import Panel from "./components/Panel";
 import UserChooser from "./components/UserChooser";
-import SessionChooser from "./components/SessionChooser";
 
 export default {
-  components: {SessionChooser, Panel, UserChooser},
+  components: {Panel, UserChooser},
   data: () => {
     let activeSession = window.lightdm.sessions.filter(session => session.key === window.lightdm.users[0].session)[0] ?? window.lightdm.sessions[0];
     return {
-      'displaySessionChooser': false,
       'displayUserChooser': false,
       'showWrongPasswordIndicator': false,
       'fadeOut': false,

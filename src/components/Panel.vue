@@ -37,7 +37,9 @@ export default {
 <style lang="sass" scoped>
 .content
   display: flex
+  flex-direction: column
+  align-items: center
 
   .toolbar
-    margin-right: 1.5rem
+    margin-bottom: 1.5rem
 </style>

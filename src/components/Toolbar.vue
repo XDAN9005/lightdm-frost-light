@@ -8,9 +8,6 @@
                        :icon="['fas', 'moon']"></font-awesome-icon>
     <font-awesome-icon @click="hibernate()" v-if="canHibernate" class="toolbar__icon"
                        :icon="['fas', 'bed']"></font-awesome-icon>
-    <div class="toolbar__space"></div>
-    <font-awesome-icon class="toolbar__icon" :icon="['fas', 'window-restore']"
-                       v-on:click="$emit('displaySessionChooser')"></font-awesome-icon>
     <font-awesome-icon class="toolbar__icon" :icon="['fas', 'users']"
                        v-on:click="$emit('displayUserChooser')"></font-awesome-icon>
   </div>
@@ -31,7 +28,6 @@ export default {
     }
   },
   emits: [
-    'displaySessionChooser',
     'displayUserChooser'
   ],
   methods: {
@@ -54,16 +50,12 @@ export default {
 <style lang="sass" scoped>
 .toolbar
   display: flex
-  flex-direction: column
-  backdrop-filter: blur(1rem)
-  background: linear-gradient(183.1deg, var(--gradient-start-color) 6.21%, var(--gradient-stop-color) 97.59%)
+  justify-content: center
+  background: linear-gradient(183.1deg, rgba(0,0,0,0.5) 6.21%, rgba(0,0,0,0.7) 97.59%)
   box-shadow: .5rem .5rem 1rem 0 #000000A0
   border-radius: 1rem
   padding: .5rem 0
-  align-items: center
-
-  .toolbar__space
-    flex: 1
+  width: 100%
 
   .toolbar__icon
     color: var(--font-color)
@@ -72,7 +64,4 @@ export default {
     padding: .3rem .6rem
     filter: drop-shadow(.25rem .25rem .35rem #00000080)
     transition: .4s transform
-
-    &:hover
-      transform: translateY(-.2rem)
 </style>
